@@ -13,7 +13,7 @@ func TestMain(m *testing.M) {
 	fmt.Println("about to start oauth tests")
 
 	rest.StartMockupServer()
-	//
+
 	os.Exit(m.Run())
 }
 
@@ -54,7 +54,7 @@ func TestGetAccessTokenInvalidRestclientResponse(t *testing.T) {
 	rest.FlushMockups()
 	rest.AddMockups(&rest.Mock{
 		HTTPMethod:   http.MethodGet,
-		URL:          "http://localhost:8080/oauth/access_token/AbC123",
+		URL:          "http://0.0.0.0:8080/oauth/access_token/AbC123",
 		ReqBody:      ``,
 		RespHTTPCode: -1,
 		RespBody:     `{}`,

@@ -22,7 +22,7 @@ const (
 
 var (
 	oauthRestClient = rest.RequestBuilder{
-		BaseURL: "http://localhost:8080",
+		BaseURL: "http://0.0.0.0:8080",
 		Timeout: 200 * time.Millisecond,
 	}
 )
@@ -95,7 +95,7 @@ func cleanRequest(request *http.Request) {
 }
 
 func getAccessToken(accessTokenId string) (*accessToken, internal_errors.RestErr) {
-	response := oauthRestClient.Get(fmt.Sprintf("/oauth/access_token/%s", accessTokenId))
+	response := oauthRestClient.Get(strings.TrimSpace(fmt.Sprintf("/oauth/access_token/%s", accessTokenId)))
 	if response == nil || response.Response == nil {
 		return nil, internal_errors.NewInternalServerError("invalid restClient response when trying to get access token",
 			errors.New("network timeout"))
